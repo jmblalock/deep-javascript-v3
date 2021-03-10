@@ -7,9 +7,11 @@ function isValidName(name) {
 function hoursAttended(attended, length) {
   if (typeof attended == "string" && attended.trim() != "") {
     attended = Number(attended);
-  } else if (typeof length == "string" && length.trim() != "") {
+  }
+  if (typeof length == "string" && length.trim() != "") {
     length = Number(length);
-  } else if (
+  }
+  if (
     typeof attended == "number" &&
     typeof length == "number" &&
     attended >= 0 &&
