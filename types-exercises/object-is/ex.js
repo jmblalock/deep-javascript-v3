@@ -1,11 +1,10 @@
 // TODO: define polyfill for `Object.is(..)`
 Object.is = function ObjectIs(x, y) {
-  var xNegZero = isItNegZero(x);
-  var yNegZero = isItNegZero(y);
+  const xNegZero = isItNegZero(x);
+  const yNegZero = isItNegZero(y);
 
-  if (xNegZero || yNegZero) return xNegZero && yNegZero;
-  else if (Number.isNaN(x) || Number.isNaN(y)) return true;
-  else if (Number.isNaN(x) && Number.isNaN(y)) return false;
+  if (xNegZero || yNegZero) return true;
+  else if (Number.isNaN(x) && Number.isNaN(y)) return true;
   else if (x === y) return true;
 
   function isItNegZero(x) {
@@ -22,7 +21,7 @@ console.log(Object.is(undefined, undefined) === true);
 console.log(Object.is(NaN, NaN) === true);
 console.log(Object.is(-0, -0) === true);
 console.log(Object.is(0, 0) === true);
-
+console.log("----------------------------->");
 console.log(Object.is(-0, 0) === false);
 console.log(Object.is(0, -0) === false);
 console.log(Object.is(0, NaN) === false);
