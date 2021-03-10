@@ -1,10 +1,17 @@
 // TODO: define polyfill for `Object.is(..)`
-class Object {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+Object.is = function ObjectIs(x, y) {
+  var xNegZero = isItNegZero(x);
+  var yNegZero = isItNegZero(y);
+
+  if (xNegZero || yNegZero) return xNegZero && yNegZero;
+  else if (Number.isNaN(x) || Number.isNaN(y)) return true;
+  else if (Number.isNaN(x) && Number.isNaN(y)) return false;
+  else if (x === y) return true;
+
+  function isItNegZero(x) {
+    return x === 0 && 1 / x === -Infinity;
   }
-}
+};
 
 // tests:
 console.log(Object.is(42, 42) === true);
