@@ -19,32 +19,20 @@ printRecords(currentEnrollment);
 console.log("----");
 remindUnpaid(currentEnrollment);
 
+function getStudentFromId(studentId) {
+  return studentRecords.find(matchId);
+
+  function matchId(record) {
+    return record.id == studentId;
+  }
+}
+
 function printRecords(recordIds) {
   var records = recordIds.map(getStudentFromId);
 
   records.sort(sortByNameAsc);
 
   records.forEach(printRecord);
-}
-
-function paidStudentsToEnroll() {
-  var recordsToEnroll = studentRecords.filter(needToEnroll);
-
-  var idsToEnroll = recordsToEnroll.map(getStudentId);
-
-  return [...currentEnrollment, ...idsToEnroll];
-}
-
-function remindUnpaid(recordIds) {
-  var unpaidIds = recordIds.filter(notYetPaid);
-
-  printRecords(unpaidIds);
-}
-
-function getStudentFromId(studentId) {
-  return studentRecords.find(function matchId(record) {
-    return record.id == studentId;
-  });
 }
 
 function sortByNameAsc(record1, record2) {
@@ -59,9 +47,12 @@ function printRecord(record) {
   );
 }
 
-function notYetPaid(studentId) {
-  var record = getStudentFromId(studentId);
-  return !record.paid;
+function paidStudentsToEnroll() {
+  var recordsToEnroll = studentRecords.filter(needToEnroll);
+
+  var idsToEnroll = recordsToEnroll.map(getStudentId);
+
+  return [...currentEnrollment, ...idsToEnroll];
 }
 
 function needToEnroll(record) {
@@ -70,6 +61,17 @@ function needToEnroll(record) {
 
 function getStudentId(record) {
   return record.id;
+}
+
+function remindUnpaid(recordIds) {
+  var unpaidIds = recordIds.filter(notYetPaid);
+
+  printRecords(unpaidIds);
+}
+
+function notYetPaid(studentId) {
+  var record = getStudentFromId(studentId);
+  return !record.paid;
 }
 
 // ********************************
