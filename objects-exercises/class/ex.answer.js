@@ -10,10 +10,6 @@ class Helpers {
       `${record.name} (${record.id}): ${record.paid ? "Paid" : "Not Paid"}`
     );
   }
-
-  getStudentId(record) {
-    return record.id;
-  }
 }
 
 class Workshop extends Helpers {
@@ -76,6 +72,10 @@ class Workshop extends Helpers {
 
   needToEnroll(record) {
     return record.paid && !this.currentEnrollment.includes(record.id);
+  }
+
+  getStudentId(record) {
+    return record.id;
   }
 
   remindUnpaid(recordIds) {
